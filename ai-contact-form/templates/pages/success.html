@@ -1,0 +1,17 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Message Sent{% endblock %}
+
+{% block content %}
+<div class="card" style="text-align: center; padding: 48px 32px;">
+  <div style="font-size: 48px; margin-bottom: 20px;">✉️</div>
+  <h1 style="margin-bottom: 12px;">Message received!</h1>
+  <p style="color: #6b7280; font-size: 15px; line-height: 1.6; margin-bottom: 28px;">
+    Thanks for reaching out. We've forwarded your message to the right team
+    and sent a confirmation to your inbox. Expect a reply within one business day.
+  </p>
+  <a href="/contact" style="display: inline-block; padding: 10px 24px; background: #2563eb; color: #fff; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 600;">
+    Send another message
+  </a>
+</div>
+{% endblock %}

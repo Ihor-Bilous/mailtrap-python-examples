@@ -1,0 +1,104 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Create your account{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h1>Create your account</h1>
+  <p class="subtitle">Tell us a bit about yourself and we'll personalise your welcome.</p>
+
+  <form method="post" action="/signup">
+
+    <div class="form-group">
+      <label for="name">Full name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value="{{ values.get('name', '') }}"
+        class="{{ 'is-invalid' if field_errors.get('name') else '' }}"
+        placeholder="Jane Smith"
+      >
+      {% if field_errors.get('name') %}
+        <span class="field-error">{{ field_errors['name'] }}</span>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="email">Work email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value="{{ values.get('email', '') }}"
+        class="{{ 'is-invalid' if field_errors.get('email') else '' }}"
+        placeholder="jane@company.com"
+      >
+      {% if field_errors.get('email') %}
+        <span class="field-error">{{ field_errors['email'] }}</span>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="role">Your role</label>
+      <select
+        id="role"
+        name="role"
+        class="{{ 'is-invalid' if field_errors.get('role') else '' }}"
+      >
+        <option value="" disabled {{ 'selected' if not values.get('role') else '' }}>Select a role</option>
+        {% for value, label in [
+          ('developer', 'Developer'),
+          ('founder', 'Founder / CEO'),
+          ('marketer', 'Marketer'),
+          ('designer', 'Designer'),
+          ('product_manager', 'Product Manager'),
+          ('other', 'Other'),
+        ] %}
+        <option value="{{ value }}" {{ 'selected' if values.get('role') == value else '' }}>{{ label }}</option>
+        {% endfor %}
+      </select>
+      {% if field_errors.get('role') %}
+        <span class="field-error">{{ field_errors['role'] }}</span>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="company_size">Company size</label>
+      <select
+        id="company_size"
+        name="company_size"
+        class="{{ 'is-invalid' if field_errors.get('company_size') else '' }}"
+      >
+        {% for value, label in [
+          ('solo', 'Just me'),
+          ('2-10', '2–10 people'),
+          ('11-50', '11–50 people'),
+          ('51-200', '51–200 people'),
+          ('200+', '200+ people'),
+        ] %}
+        <option value="{{ value }}" {{ 'selected' if values.get('company_size', 'solo') == value else '' }}>{{ label }}</option>
+        {% endfor %}
+      </select>
+      {% if field_errors.get('company_size') %}
+        <span class="field-error">{{ field_errors['company_size'] }}</span>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="use_case">What will you use this for?</label>
+      <textarea
+        id="use_case"
+        name="use_case"
+        class="{{ 'is-invalid' if field_errors.get('use_case') else '' }}"
+        placeholder="Briefly describe your main use case..."
+      >{{ values.get('use_case', '') }}</textarea>
+      {% if field_errors.get('use_case') %}
+        <span class="field-error">{{ field_errors['use_case'] }}</span>
+      {% endif %}
+    </div>
+
+    <button type="submit" class="btn">Create account</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+from typing import Any, Protocol
+
+from app.schemas import OrderData
+
+
+class MailerProtocol(Protocol):
+    def send_order_confirmation(self, order: OrderData) -> None: ...
+
+
+class StripeGatewayProtocol(Protocol):
+    def construct_event(self, payload: bytes, sig_header: str, secret: str) -> dict: ...
+    def get_checkout_session(self, session_id: str) -> Any: ...
+    def list_line_items(self, session_id: str) -> Any: ...

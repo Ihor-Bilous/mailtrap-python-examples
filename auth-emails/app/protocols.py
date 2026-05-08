@@ -1,0 +1,6 @@
+from typing import Protocol
+
+
+class MailerProtocol(Protocol):
+    def send_verification_email(self, user_name: str, user_email: str, verification_url: str) -> None: ...
+    def send_reset_email(self, user_name: str, user_email: str, reset_url: str) -> None: ...

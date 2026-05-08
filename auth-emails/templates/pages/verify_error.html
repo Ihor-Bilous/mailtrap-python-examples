@@ -1,0 +1,24 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Verification Failed{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h1>Verification failed</h1>
+  <div class="alert alert-error">{{ error }}</div>
+  <p style="font-size: 14px; color: #6b7280; margin-bottom: 20px;">
+    Request a new verification link by entering your email below.
+  </p>
+  <form method="post" action="/verify-email/resend">
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" id="email" name="email"
+             value="{{ values.email or '' }}"
+             class="{{ 'is-invalid' if field_errors.email else '' }}"
+             required autofocus>
+      {% if field_errors.email %}<span class="field-error">{{ field_errors.email }}</span>{% endif %}
+    </div>
+    <button type="submit" class="btn">Send new link</button>
+  </form>
+</div>
+{% endblock %}

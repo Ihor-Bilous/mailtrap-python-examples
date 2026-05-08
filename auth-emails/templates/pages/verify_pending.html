@@ -1,0 +1,33 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Verify Your Email{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h1>Check your email</h1>
+  {% if message %}
+  <div class="alert alert-success">{{ message }}</div>
+  {% else %}
+  <div class="alert alert-info">
+    We sent a verification link to <strong>{{ email or "your email address" }}</strong>.
+    Click the link in the email to activate your account.
+  </div>
+  {% endif %}
+
+  <p style="font-size: 14px; color: #6b7280; margin-bottom: 20px;">
+    Didn't receive the email? Check your spam folder or request a new link below.
+  </p>
+
+  <form method="post" action="/verify-email/resend">
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" id="email" name="email"
+             value="{{ values.email or '' }}"
+             class="{{ 'is-invalid' if field_errors.email else '' }}"
+             required>
+      {% if field_errors.email %}<span class="field-error">{{ field_errors.email }}</span>{% endif %}
+    </div>
+    <button type="submit" class="btn btn-secondary">Resend verification email</button>
+  </form>
+</div>
+{% endblock %}

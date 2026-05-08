@@ -1,0 +1,72 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h1>Contact Us</h1>
+  <p class="subtitle">Send us a message and we'll get back to you within one business day.</p>
+
+  <form method="post" action="/contact">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value="{{ values.get('name', '') }}"
+        class="{{ 'is-invalid' if field_errors.get('name') else '' }}"
+        placeholder="Jane Smith"
+      >
+      {% if field_errors.get('name') %}
+        <span class="field-error">{{ field_errors['name'] }}</span>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value="{{ values.get('email', '') }}"
+        class="{{ 'is-invalid' if field_errors.get('email') else '' }}"
+        placeholder="jane@example.com"
+      >
+      {% if field_errors.get('email') %}
+        <span class="field-error">{{ field_errors['email'] }}</span>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="subject">Subject</label>
+      <input
+        type="text"
+        id="subject"
+        name="subject"
+        value="{{ values.get('subject', '') }}"
+        class="{{ 'is-invalid' if field_errors.get('subject') else '' }}"
+        placeholder="How can we help?"
+      >
+      {% if field_errors.get('subject') %}
+        <span class="field-error">{{ field_errors['subject'] }}</span>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea
+        id="message"
+        name="message"
+        class="{{ 'is-invalid' if field_errors.get('message') else '' }}"
+        placeholder="Tell us more..."
+      >{{ values.get('message', '') }}</textarea>
+      {% if field_errors.get('message') %}
+        <span class="field-error">{{ field_errors['message'] }}</span>
+      {% endif %}
+    </div>
+
+    <button type="submit" class="btn">Send Message</button>
+  </form>
+</div>
+{% endblock %}
